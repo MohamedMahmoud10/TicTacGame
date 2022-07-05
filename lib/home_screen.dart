@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: 100,
                 ),
                 _expandedTable(context),
-                // ...lastBloc()
+                ...lastBloc()
               ])
             : Row(
                 children: [
@@ -37,6 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ...firstBloc(),
+                        const SizedBox( height: 50,),
+                        ...lastBloc(),
                       ],
                     ),
                   ),
@@ -113,42 +115,50 @@ class _MyHomePageState extends State<MyHomePage> {
     ));
   }
 
-  // List<Widget> lastBloc() {
-  //   return [
-  //     //Show Result Who Win
-  //     Text(
-  //       result.toUpperCase(),
-  //       style: const TextStyle(fontSize: 50),
-  //     ),
-  //     //Repeat The Game And Reinitlize All Varibales
-  //     // ElevatedButton.icon(
-  //     //     onPressed: () {
-  //     //       setState(() {
-  //     //         Player.playerX = [];
-  //     //         Player.playerO = [];
-  //     //         activePlyer = 'X';
-  //     //         result = '';
-  //     //         gameOver = false;
-  //     //         turn = 0;
-  //     //         isSwitched = false;
-  //     //       });
-  //     //     },
-  //     //     style: ButtonStyle(
-  //     //       backgroundColor:
-  //     //           MaterialStateProperty.all(Theme.of(context).splashColor),
-  //     //       shape: MaterialStateProperty.all(
-  //     //         RoundedRectangleBorder(
-  //     //           borderRadius: BorderRadius.circular(15),
-  //     //         ),
-  //     //       ),
-  //     //     ),
-  //     //     icon: const Icon(Icons.repeat_sharp),
-  //     //     label: const Text(
-  //     //       'Repeat The Game',
-  //     //       style: TextStyle(fontSize: 30),
-  //     //     )),
-  //   ];
-  // }
+  List<Widget> lastBloc() {
+    return [
+      FloatingActionButton(
+        backgroundColor: Theme.of(context).splashColor,
+        onPressed: () => resetGame(),
+        child: const Icon(
+          Icons.replay_outlined,
+        ),
+      ),
+      //     //Show Result Who Win
+      //     Text(
+      //       result.toUpperCase(),
+      //       style: const TextStyle(fontSize: 50),
+      //     ),
+      //     //Repeat The Game And Reinitlize All Varibales
+      //     // ElevatedButton.icon(
+      //     //     onPressed: () {
+      //     //       setState(() {
+      //     //         Player.playerX = [];
+      //     //         Player.playerO = [];
+      //     //         activePlyer = 'X';
+      //     //         result = '';
+      //     //         gameOver = false;
+      //     //         turn = 0;
+      //     //         isSwitched = false;
+      //     //       });
+      //     //     },
+      //     //     style: ButtonStyle(
+      //     //       backgroundColor:
+      //     //           MaterialStateProperty.all(Theme.of(context).splashColor),
+      //     //       shape: MaterialStateProperty.all(
+      //     //         RoundedRectangleBorder(
+      //     //           borderRadius: BorderRadius.circular(15),
+      //     //         ),
+      //     //       ),
+      //     //     ),
+      //     //     icon: const Icon(Icons.repeat_sharp),
+      //     //     label: const Text(
+      //     //       'Repeat The Game',
+      //     //       style: TextStyle(fontSize: 30),
+      //     //     )),
+    ];
+  }
+
   //reset game method
   void resetGame() {
     setState(() {
@@ -158,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
       result = '';
       gameOver = false;
       turn = 0;
-      isSwitched = false;
+      //isSwitched = false;
     });
   }
 
@@ -208,12 +218,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   AlertDialog alertDialog(String winnerPlayer, String result) {
     return AlertDialog(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).shadowColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: Container(
         height: 250,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(15)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -222,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
               result,
               style: const TextStyle(
                   fontSize: 45,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
             // const SizedBox(height: 75,),
@@ -230,7 +239,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
-                    backgroundColor: MaterialStateProperty.all(Colors.brown)),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).canvasColor)),
                 onPressed: () {
                   setState(() {
                     Navigator.of(context).pop({resetGame()});
@@ -240,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Try Again',
                   style: TextStyle(
                       fontSize: 50,
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.italic),
                 ))

@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           primaryColor: const Color(0xFF00061a),
           shadowColor: const Color(0xFF001456),
-          splashColor: const Color(0xFF4169e8)),
+          splashColor: const Color(0xFF4169e8),
+        canvasColor: const Color(0xFF00009c)//00009c
+      ),
     );
   }
 }
